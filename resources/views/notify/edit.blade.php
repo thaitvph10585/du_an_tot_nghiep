@@ -13,7 +13,7 @@
         <input class="form-control" type="text" name="content" value="{{$model->content}}">
     </div>
     <div class="form-group">
-        <label for="">Image</label>
+        <label for="">Imagee</label>
         <input class="form-control" type="file" name="image">
         <div>
           
