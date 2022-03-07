@@ -11,11 +11,14 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+
+    /**signup view */
     public function signupForm()
     {
         return view('user.signup');
     }
 
+    /**signup form */
     public function postSignup(SignupRequest $request)
     {
         $model = new User();
@@ -25,11 +28,14 @@ class LoginController extends Controller
         return redirect(route('login'));
     }
 
+    /**Login view */
+
     public function loginForm()
     {
         return view('user.login');
     }
 
+    /**Login form */
     public function postLogin(LoginRequest $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
