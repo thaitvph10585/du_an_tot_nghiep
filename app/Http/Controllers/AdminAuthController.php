@@ -10,7 +10,7 @@ class AdminAuthController extends Controller
 {
     public function index()
     {
-        return view('admin.home');
+        return view('welcome');
     }
 
     public function login()
