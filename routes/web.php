@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/**Router login user */
 Route::get('signup', [LoginController::class, 'signupForm'])->name('signup');
 Route::post('signup', [LoginController::class, 'postSignup']);
 
@@ -32,6 +32,8 @@ Route::post('index', [InforController::class, 'update']);
 Route::get('password', [InforController::class, 'show'])->name('password');
 Route::post('password', [InforController::class, 'updated']);
 
+
+/**Router login admin */
 Route::get('admin/', [AdminAuthController::class, 'index'])
     ->name('admin.home')
     ->middleware('auth:webadmin');
