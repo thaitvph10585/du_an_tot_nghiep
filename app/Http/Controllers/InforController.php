@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 class InforController extends Controller
 {
+
+    /**View account */
     public function index() {
         $infor = Auth::user();
         return view('user.user', compact('infor'));
@@ -26,6 +28,7 @@ class InforController extends Controller
         return redirect(route('infor'));
     }
 
+    /**View update password */
     public function show(){
         return view('user.password'); 
     }
