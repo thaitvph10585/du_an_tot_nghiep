@@ -31,7 +31,7 @@
             <input type="file" name="avatar" class="form-control" value="{{$infor->avatar}}" placeholder="Phone number">
             <img src="{{ asset($infor->avatar) }}" alt="">
         </div>
-        @error('phone_number')
+        @error('avatar')
                 <p class="text-danger">{{$message}}</p>
         @enderror
             <div class="col-4">

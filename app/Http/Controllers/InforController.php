@@ -38,4 +38,10 @@ class InforController extends Controller
         Auth::user()->update(['password'=> Hash::make($request->new_password)]);
         return redirect(route('user')); */
     }
+
+
+    public function infoAdmin() {
+        $infor = Auth::user();
+        return view('admin.infor', compact('infor'));
+    }
 }

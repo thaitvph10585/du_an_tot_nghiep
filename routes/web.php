@@ -34,14 +34,15 @@ Route::post('password', [InforController::class, 'updated']);
 
 
 /**Router login admin */
-Route::get('admin/', [AdminAuthController::class, 'index'])
-    ->name('admin.home')
-    ->middleware('auth:webadmin');
-Route::get('admin/login', [AdminAuthController::class, 'login'])
-    ->name('admin.login');
-Route::post('admin/login', [AdminAuthController::class, 'handleLogin'])
-    ->name('admin.handleLogin');
-Route::get('admin/logout', [AdminAuthController::class, 'index'])
-    ->name('admin.logout');
+Route::prefix('admin')->group(function(){
+    Route::get('/', [AdminAuthController::class, 'index'])->name('admin.home')->middleware('auth:webadmin');
+
+    Route::get('/login', [AdminAuthController::class, 'login'])->name('admin.login');
+    Route::post('/login', [AdminAuthController::class, 'handleLogin'])->name('admin.handleLogin');
+
+    Route::get('/infor', [InforController::class, 'infoAdmin'])->name('inforAdmin');
+
+    Route::get('/logout', [AdminAuthController::class, 'index'])->name('admin.logout');
+});
 //notify
 
