@@ -53,7 +53,7 @@ class InforController extends Controller
     public function updatedAdmin(InforRequest $request){
         $model = Admin::find(Auth::user()->id);
         if ($request->hasFile('avatar')) {
-            $imgPath = $request->file('avatar')->store('users');
+            $imgPath = $request->file('avatar')->store('admins');
             $imgPath = str_replace('public/', '', $imgPath);
             $model->avatar = $imgPath;
         }
