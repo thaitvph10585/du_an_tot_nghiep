@@ -28,7 +28,7 @@ class InforRequest extends FormRequest
             'name' => 'required',
             'phone_number' => 'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
             'email' => 'required|email',
-            'avatar' => 'mimes:jpg,bmp,png,gif',
+            'avatar' => 'image',
         ];
 
         if ($this->id == null) {
@@ -44,7 +44,7 @@ class InforRequest extends FormRequest
             'email.required' => 'Bạn phải nhập email',
             'email.email' => 'Email không đúng định dạng',
             'avatar.required' => 'Bạn phải chọn một ảnh',
-            'avatar.mimes' => 'Ảnh phải đúng định dạng',
+            'avatar.image' => 'Ảnh phải đúng định dạng',
             'phone_number.required' => 'Bạn phải nhập số điện thoại',
             'phone_number.regex' => 'Số điện thoại phải đúng định dạng',
             'phone_number.not_regex' => 'Số điện thoại không bao gồm chữ',

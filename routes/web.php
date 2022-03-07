@@ -41,6 +41,8 @@ Route::prefix('admin')->group(function(){
     Route::post('/login', [AdminAuthController::class, 'handleLogin'])->name('admin.handleLogin');
 
     Route::get('/infor', [InforController::class, 'infoAdmin'])->name('inforAdmin');
+    Route::get('/update-infor', [InforController::class, 'updateInforAdmin'])->name('updateInfor');
+    Route::post('/update-infor', [InforController::class, 'updatedAdmin']);
 
     Route::get('/logout', [AdminAuthController::class, 'index'])->name('admin.logout');
 });

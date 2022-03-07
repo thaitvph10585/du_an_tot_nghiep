@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InforRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -43,5 +44,21 @@ class InforController extends Controller
     public function infoAdmin() {
         $infor = Auth::user();
         return view('admin.infor', compact('infor'));
+    }
+
+    public function updateInforAdmin() {
+        $infor = Auth::user();
+        return view('admin.updateInfor', compact('infor'));
+    }
+    public function updatedAdmin(InforRequest $request){
+        $model = Admin::find(Auth::user()->id);
+        if ($request->hasFile('avatar')) {
+            $imgPath = $request->file('avatar')->store('users');
+            $imgPath = str_replace('public/', '', $imgPath);
+            $model->avatar = $imgPath;
+        }
+        $model->fill($request->all());
+        $model->save();
+        return redirect(route('updateInfor'));
     }
 }

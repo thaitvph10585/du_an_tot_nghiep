@@ -12,15 +12,28 @@
         <div class="input-group mb-3">
             <input type="name" name="name" class="form-control" value="{{$infor->name}}" placeholder="Name">
         </div>
+        @error('name')
+                <p class="text-danger">{{$message}}</p>
+        @enderror
         <div class="input-group mb-3">
             <input type="email" name="email" class="form-control" value="{{$infor->email}}" placeholder="Email">
         </div>
+        @error('email')
+                <p class="text-danger">{{$message}}</p>
+        @enderror
         <div class="input-group mb-3">
+            <input type="file" name="avatar" class="form-control" value="{{$infor->avatar}}" placeholder="Phone number">
             <img src="{{ asset($infor->avatar) }}" alt="">
         </div>
-        <div class="col-4">
-            <a href="{{ route('updateInfor') }}">Change infor account</a>
-        </div>
+        @error('avatar')
+                <p class="text-danger">{{$message}}</p>
+        @enderror
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">lưu</button>
+            </div>
+            <div class="col-4">
+                <a href="{{route('password')}}">Change password</a>
+            </div>
     </form>
 </body>
 </html>

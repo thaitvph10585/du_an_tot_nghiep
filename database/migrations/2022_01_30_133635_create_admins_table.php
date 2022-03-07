@@ -22,6 +22,8 @@ class CreateAdminsTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        
     }
 
     /**

@@ -583,7 +583,7 @@
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="javascript:;" class="nav-link">
+											<a href="{{ route('updateInfor') }}" class="nav-link">
 												<i data-feather="edit"></i>
 												<span>Edit Profile</span>
 											</a>
