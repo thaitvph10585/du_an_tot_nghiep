@@ -8,16 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
 {
+
+    /**View admin */
     public function index()
     {
         return view('welcome');
     }
 
+
+    /**Login admin form*/    
     public function login()
     {
         return view('admin.login');
     }
 
+     /**Login admin*/  
     public function handleLogin(LoginRequest $req)
     {
         if(Auth::guard('webadmin')
@@ -29,6 +34,7 @@ class AdminAuthController extends Controller
         return back()->with('msg', 'Tài khoản/mật khẩu không chính xác');
     }
 
+     /**Logout admin*/ 
     public function logout()
     {
         Auth::guard('webadmin')
