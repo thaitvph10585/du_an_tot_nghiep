@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\InforController;
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
+
 /**Router login user */
 Route::get('signup', [LoginController::class, 'signupForm'])->name('signup');
 Route::post('signup', [LoginController::class, 'postSignup']);
@@ -34,17 +35,29 @@ Route::post('password', [InforController::class, 'updated']);
 
 
 /**Router login admin */
-Route::prefix('admin')->group(function(){
-    Route::get('/', [AdminAuthController::class, 'index'])->name('admin.home')->middleware('auth:webadmin');
-
-    Route::get('/login', [AdminAuthController::class, 'login'])->name('admin.login');
-    Route::post('/login', [AdminAuthController::class, 'handleLogin'])->name('admin.handleLogin');
+Route::prefix('admin')->middleware('admin-role')->group(function(){
+    Route::get('/home', [AdminAuthController::class, 'index'])->name('admin.home')->middleware('auth:webadmin');
 
     Route::get('/infor', [InforController::class, 'infoAdmin'])->name('inforAdmin');
     Route::get('/update-infor', [InforController::class, 'updateInforAdmin'])->name('updateInfor');
     Route::post('/update-infor', [InforController::class, 'updatedAdmin']);
 
-    Route::get('/logout', [AdminAuthController::class, 'index'])->name('admin.logout');
 });
+
+
+Route::prefix('admin')->group(function(){
+    Route::get('/login', [AdminAuthController::class, 'login'])->name('admin.login');
+    Route::post('/login', [AdminAuthController::class, 'handleLogin'])->name('admin.handleLogin');
+});
+
+Route::any('logout', function(){
+    Auth::logout();
+    return redirect(route('login'));
+})->name('logout');
+
+Route::any('forbidden', function(){
+    return 'Bạn không có quyền truy cập vào đường dẫn này';
+})->name('403');
+
 //notify
 
