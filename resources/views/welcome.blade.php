@@ -570,20 +570,20 @@
 										<img src="https://via.placeholder.com/80x80" alt="">
 									</div>
 									<div class="info text-center">
-										<p class="name font-weight-bold mb-0">{{ Auth::user()->name }}</p>
-										<p class="email text-muted mb-3">{{ Auth::user()->email }}</p>
+										<p class="name font-weight-bold mb-0">{{ Auth::guard('admin')->user()->name }}</p>
+										<p class="email text-muted mb-3">{{ Auth::guard('admin')->user()->email }}</p>
 									</div>
 								</div>
 								<div class="dropdown-body">
 									<ul class="profile-nav p-0 pt-3">
 										<li class="nav-item">
-											<a href="{{ route('inforAdmin') }}" class="nav-link">
+											<a href="{{route('admin.infor')}}" class="nav-link">
 												<i data-feather="user"></i>
 												<span>Profile</span>
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="{{ route('updateInfor') }}" class="nav-link">
+											<a href="{{ route('admin.account') }}" class="nav-link">
 												<i data-feather="edit"></i>
 												<span>Edit Profile</span>
 											</a>
@@ -595,8 +595,11 @@
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="{{ route('logout') }}" class="nav-link">
-												<i data-feather="log-out"></i>
+											<a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
+                        <form id="logout-form" method="POST" action="{{ route('admin.logout') }}">
+                          @csrf
+                        </form>
+                        <i data-feather="log-out"></i>
 												<span>Log Out</span>
 											</a>
 										</li>

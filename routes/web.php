@@ -24,36 +24,41 @@ use Illuminate\Support\Facades\Route;
 Route::get('signup', [LoginController::class, 'signupForm'])->name('signup');
 Route::post('signup', [LoginController::class, 'postSignup']);
 
-Route::get('login', [LoginController::class, 'loginForm'])->name('login');
-Route::post('login', [LoginController::class, 'postLogin']);
 
-Route::get('index', [InforController::class, 'index'])->name('user')->middleware('auth:web');
-Route::post('index', [InforController::class, 'update']);
+
+
 
 Route::get('password', [InforController::class, 'show'])->name('password');
 Route::post('password', [InforController::class, 'updated']);
 
+Route::prefix('user')->name('user.')->group(function() {
+    Route::middleware(['guest:web'])->group(function(){
+        Route::get('login', [LoginController::class, 'loginForm'])->name('login');
+        Route::post('login', [LoginController::class, 'postLogin']);
+    });
+    Route::middleware(['auth:web'])->group(function() {
+        Route::get('index', [InforController::class, 'index'])->name('info');
+        Route::post('index', [InforController::class, 'update']);
+    });
+});
 
 /**Router login admin */
-Route::prefix('admin')->middleware('admin-role')->group(function(){
-    Route::get('/home', [AdminAuthController::class, 'index'])->name('admin.home')->middleware('auth:webadmin');
+Route::prefix('admin')->name('admin.')->group(function(){
+    Route::middleware(['guest:admin'])->group(function(){
+        Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
+        Route::post('/login', [AdminAuthController::class, 'postLogin']);
+    });
 
-    Route::get('/infor', [InforController::class, 'infoAdmin'])->name('inforAdmin');
-    Route::get('/update-infor', [InforController::class, 'updateInforAdmin'])->name('updateInfor');
-    Route::post('/update-infor', [InforController::class, 'updatedAdmin']);
+    Route::middleware(['auth:admin'])->group(function(){
+        Route::get('/', [AdminAuthController::class, 'index'])->name('home');
+        Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
 
+        Route::get('infor', [InforController::class, 'inforAdmin'])->name('infor');
+        Route::get('update-infor', [InforController::class, 'updateInforAdmin'])->name('account');
+        Route::post('update-infor', [InforController::class, 'updatedAdmin']);
+    });
 });
 
-
-Route::prefix('admin')->group(function(){
-    Route::get('/login', [AdminAuthController::class, 'login'])->name('admin.login');
-    Route::post('/login', [AdminAuthController::class, 'handleLogin'])->name('admin.handleLogin');
-});
-
-Route::any('logout', function(){
-    Auth::logout();
-    return redirect(route('login'));
-})->name('logout');
 
 Route::any('forbidden', function(){
     return 'Bạn không có quyền truy cập vào đường dẫn này';

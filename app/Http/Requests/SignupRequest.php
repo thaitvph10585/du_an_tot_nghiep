@@ -39,7 +39,7 @@ class SignupRequest extends FormRequest
                     ->mixedCase()
                     ->numbers(),
             ],
-            're-password' => 'same:password'
+            're-password' => 'required|same:password'
         ];
         return $requestRule;
     }
@@ -52,6 +52,9 @@ class SignupRequest extends FormRequest
             'email.required' => 'Bạn phải nhập email',
             'email.email' => 'Email không đúng định dạng',
             'email.unique' => 'Email đã tồn tại, vui lòng nhập email khác',
+            'phone_number.required' => 'Bạn phải nhập số điện thoại',
+            'phone_number.regex' => 'Bạn phải nhập đúng định dạng số điện thoại',
+            'phone_number.min' => 'Số điện thoại phải có ít nhất 9 số',
             'password.required' => 'Bạn phải nhập vào mật khẩu mới',
             'password.string' => 'Mật khẩu phải là một chuỗi',
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự',
@@ -59,7 +62,6 @@ class SignupRequest extends FormRequest
             'password.mixedCase' => 'Mật khẩu phải có ít nhất 1 chữ hoa, 1 chữ thường',
             're-password.required' => 'Bạn phải xác nhận mật khẩu',
             're-password.same' => 'Xác nhận mật khẩu không giống',
-         
         ];
     }
 }

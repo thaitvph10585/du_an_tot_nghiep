@@ -21,9 +21,9 @@ class AdminRole
             return redirect(route('admin.login'));
         }
 
-        if (Auth::user()->role_id > 1) {
+       /*  if (Auth::user()->role_id > 1) {
             return redirect(route('403'));
-        }
+        } */
 
         return $next($request);
     }

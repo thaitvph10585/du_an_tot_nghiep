@@ -15,6 +15,7 @@
     <div class="form-group">
         <label for="">Imagee</label>
         <input class="form-control" type="file" name="image">
+        <img src="{{ asset($model->avatar) }}" alt="">
         <div>
           
         </div>

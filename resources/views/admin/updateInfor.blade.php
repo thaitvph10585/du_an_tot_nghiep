@@ -1,39 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <form action="" method="post" novalidate>
+@extends('welcome')
+@section('content')
+<div class="card-body">
+    <h6 class="card-title">Thông tin tài khoản</h6>
+    <form action="" method="post" novalidate enctype="multipart/form-data">
         @csrf
-        <div class="input-group mb-3">
-            <input type="name" name="name" class="form-control" value="{{$infor->name}}" placeholder="Name">
-        </div>
-        @error('name')
+        <div class="form-group mb-3">
+            <label  for="">Tên người dùng</label>
+            @error('name')
                 <p class="text-danger">{{$message}}</p>
-        @enderror
-        <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control" value="{{$infor->email}}" placeholder="Email">
+            @enderror
+            <input type="name" name="name" class="form-control" value="{{Auth::user()->name}}" placeholder="Name">
         </div>
-        @error('email')
+      
+        <div class="form-group mb-3">
+            <label  for="">Email</label>
+            @error('email')
                 <p class="text-danger">{{$message}}</p>
-        @enderror
-        <div class="input-group mb-3">
-            <input type="file" name="avatar" class="form-control" value="{{$infor->avatar}}" placeholder="Phone number">
-            <img src="{{ asset($infor->avatar) }}" alt="">
+            @enderror
+            <input type="email" name="email" class="form-control" value="{{Auth::user()->email}}" placeholder="Email">
         </div>
-        @error('avatar')
+      
+        <div class="form-group mb-3">
+            <label  for="">Ảnh đại diện</label>
+            @error('avatar')
                 <p class="text-danger">{{$message}}</p>
-        @enderror
-            <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block">lưu</button>
-            </div>
-            <div class="col-4">
-                <a href="{{route('password')}}">Change password</a>
-            </div>
+            @enderror
+            <input type="file" name="avatar" class="form-control" value="{{Auth::user()->avatar}}">
+            <img src="{{ asset(Auth::user()->avatar) }}" alt="">
+        </div>
+       
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">lưu</button>
+        </div>
+        <div class="form-group">
+            <a href="{{route('password')}}">Change password</a>
+        </div>
     </form>
-</body>
-</html>
+</div>
+@endsection

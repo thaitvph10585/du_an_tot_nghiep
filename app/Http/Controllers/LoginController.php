@@ -5,17 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Models\User;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-
-    public function __construct() {
-        $this->middleware('guest', ['except' => 'logout']);
-    }
-    
     /**signup view */
     public function signupForm()
     {
@@ -29,7 +23,7 @@ class LoginController extends Controller
         $model->password = Hash::make($request->password);
         $model->fill($request->all());
         $model->save();
-        return redirect(route('login'));
+        return redirect(route('user.login'));
     }
 
     /**Login view */
@@ -42,8 +36,8 @@ class LoginController extends Controller
     /**Login form */
     public function postLogin(LoginRequest $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect(route('user'));
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            return redirect(route('user.login'));
         }
         return back()->with('msg', 'Tài khoản/mật khẩu không chính xác');
     }

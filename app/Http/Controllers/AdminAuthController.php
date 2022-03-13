@@ -9,15 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class AdminAuthController extends Controller
 {
 
-    public function __construct() {
-        $this->middleware('admin-role', ['except' => 'logout']);
-    }
     /**View admin */
     public function index()
     {
         return view('welcome');
     }
-
 
     /**Login admin form*/
     public function login()
@@ -26,26 +22,17 @@ class AdminAuthController extends Controller
     }
 
     /**Login admin*/
-    public function handleLogin(LoginRequest $req)
-    {
-        if (Auth::guard('webadmin')
-            ->attempt($req->only(['email', 'password']))
-        ) {
-            return redirect()
-                ->route('admin.home');
+    public function postLogin(LoginRequest $request)
+    {   
+        $check = $request->only('email', 'password');
+        if (Auth::guard('admin')->attempt($check)) {
+            return redirect()->route('admin.login');
         }
         return back()->with('msg', 'Tài khoản/mật khẩu không chính xác');
     }
 
-    /**Logout admin*/
-    public function logout()
-    {
-        Auth::guard('webadmin')
-            ->logout();
-
-        return redirect()
-            ->route('admin.login');
+    public function logout() {
+        Auth::guard('admin')->logout();
+        return redirect()->route('admin.login');
     }
-
-    
 }

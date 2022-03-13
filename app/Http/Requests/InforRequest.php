@@ -28,7 +28,7 @@ class InforRequest extends FormRequest
             'name' => 'required',
             'phone_number' => 'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
             'email' => 'required|email',
-            'avatar' => 'mimes:jpg,bmp,png,gif',
+            'avatar' => 'mimes:jpg,bmp,png,gif,jpeg',
         ];
 
         if ($this->id == null) {

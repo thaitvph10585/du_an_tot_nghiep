@@ -14,19 +14,19 @@
             <form action="" method="post" novalidate>
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="name" name="name" class="form-control" placeholder="Name">
+                    <input type="name" name="name" class="form-control" value="{{old('name')}}" placeholder="Name">
                 </div>
                 @error('name')
                         <p class="text-danger">{{$message}}</p>
                 @enderror
                 <div class="input-group mb-3">
-                    <input type="email" name="email" class="form-control" placeholder="Email">
+                    <input type="email" name="email" class="form-control" value="{{old('email')}}" placeholder="Email">
                 </div>
                 @error('email')
                         <p class="text-danger">{{$message}}</p>
                 @enderror
                 <div class="input-group mb-3">
-                    <input type="text" name="phone_number" class="form-control" placeholder="Phone number">
+                    <input type="text" name="phone_number" class="form-control" value="{{old('phone_number')}}" placeholder="Phone number">
                 </div>
                 @error('phone_number')
                         <p class="text-danger">{{$message}}</p>

@@ -20,13 +20,13 @@ class InforController extends Controller
     public function update(InforRequest $request){
         $model = User::find(Auth::user()->id);
         if ($request->hasFile('avatar')) {
-            $imgPath = $request->file('avatar')->store('users');
+            $imgPath = $request->file('avatar')->store('storage/users');
             $imgPath = str_replace('public/', '', $imgPath);
             $model->avatar = $imgPath;
         }
         $model->fill($request->all());
         $model->save();
-        return redirect(route('infor'));
+        return redirect(route('user.infor'));
     }
 
     /**View update password */
@@ -41,24 +41,23 @@ class InforController extends Controller
     }
 
 
-    public function infoAdmin() {
+    public function inforAdmin() {
         $infor = Auth::user();
         return view('admin.infor', compact('infor'));
     }
 
     public function updateInforAdmin() {
-        $infor = Auth::user();
-        return view('admin.updateInfor', compact('infor'));
+        return view('admin.updateInfor');
     }
     public function updatedAdmin(InforRequest $request){
         $model = Admin::find(Auth::user()->id);
         if ($request->hasFile('avatar')) {
-            $imgPath = $request->file('avatar')->store('admins');
+            $imgPath = $request->file('avatar')->store('storage/admins');
             $imgPath = str_replace('public/', '', $imgPath);
             $model->avatar = $imgPath;
         }
         $model->fill($request->all());
         $model->save();
-        return redirect(route('updateInfor'));
+        return redirect(route('admin.account'));
     }
 }
