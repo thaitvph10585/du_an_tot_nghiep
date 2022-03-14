@@ -7,15 +7,15 @@ use App\Http\Requests\PasswordRequest;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class InforController extends Controller
 {
 
     /**View account */
     public function index() {
-        $infor = Auth::user();
-        return view('user.user', compact('infor'));
+        return view('user.user');
     }
     public function update(InforRequest $request){
         $model = User::find(Auth::user()->id);
@@ -26,6 +26,7 @@ class InforController extends Controller
         }
         $model->fill($request->all());
         $model->save();
+        Alert::success('Success!', 'Bạn đã cập nhật thành công');
         return redirect(route('user.infor'));
     }
 
@@ -42,14 +43,13 @@ class InforController extends Controller
 
 
     public function inforAdmin() {
-        $infor = Auth::user();
-        return view('admin.infor', compact('infor'));
+        return view('admin.infor');
     }
 
-    public function updateInforAdmin() {
+    public function editAdminForm() {
         return view('admin.updateInfor');
     }
-    public function updatedAdmin(InforRequest $request){
+    public function saveEditAdmin(InforRequest $request){
         $model = Admin::find(Auth::user()->id);
         if ($request->hasFile('avatar')) {
             $imgPath = $request->file('avatar')->store('storage/admins');
@@ -58,6 +58,7 @@ class InforController extends Controller
         }
         $model->fill($request->all());
         $model->save();
+        Alert::success('Success!', 'Bạn đã cập nhật thành công');
         return redirect(route('admin.account'));
     }
 }

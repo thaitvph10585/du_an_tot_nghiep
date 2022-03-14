@@ -1,5 +1,6 @@
 @extends('welcome')
 @section('content')
+@include('sweetalert::alert')
 <div class="card-body">
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -15,12 +16,8 @@
     <div class="form-group">
         <label for="">Imagee</label>
         <input class="form-control" type="file" name="image">
-        <img src="{{ asset($model->avatar) }}" alt="">
-        <div>
-          
-        </div>
+        <img src="{{ asset($model->image) }}" width="250px" alt="">
     </div>
-    <img src="{{$model->image}}" alt="">
     <div>
         <button class="btn btn-success" type="submit"> Save</button>
     </div>

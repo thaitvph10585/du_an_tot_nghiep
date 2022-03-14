@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\InforController;
 use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,8 +53,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
 
         Route::get('infor', [InforController::class, 'inforAdmin'])->name('infor');
-        Route::get('update-infor', [InforController::class, 'updateInforAdmin'])->name('account');
-        Route::post('update-infor', [InforController::class, 'updatedAdmin']);
+        Route::get('update-infor', [InforController::class, 'editAdminForm'])->name('account');
+        Route::post('update-infor', [InforController::class, 'saveEditAdmin']);
     });
 });
 

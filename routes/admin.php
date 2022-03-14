@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\NotifyController;
-use App\Models\Notify;
 use Illuminate\Support\Facades\Route;
 Route::prefix('notify')->group(function(){
     Route::get('',[NotifyController::class,'index'])->name('notify.index');

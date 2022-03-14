@@ -1,5 +1,6 @@
 @extends('welcome')
 @section('content')
+@include('sweetalert::alert')
 <div class="card-body">
     <h6 class="card-title">Thông tin tài khoản</h6>
     <form action="" method="post" novalidate enctype="multipart/form-data">
@@ -9,7 +10,7 @@
             @error('name')
                 <p class="text-danger">{{$message}}</p>
             @enderror
-            <input type="name" name="name" class="form-control" value="{{Auth::user()->name}}" placeholder="Name">
+            <input type="name" name="name" class="form-control" value="{{Auth::guard('admin')->user()->name}}" placeholder="Name">
         </div>
       
         <div class="form-group mb-3">
@@ -17,7 +18,7 @@
             @error('email')
                 <p class="text-danger">{{$message}}</p>
             @enderror
-            <input type="email" name="email" class="form-control" value="{{Auth::user()->email}}" placeholder="Email">
+            <input type="email" name="email" class="form-control" value="{{Auth::guard('admin')->user()->email}}" placeholder="Email">
         </div>
       
         <div class="form-group mb-3">
@@ -25,8 +26,8 @@
             @error('avatar')
                 <p class="text-danger">{{$message}}</p>
             @enderror
-            <input type="file" name="avatar" class="form-control" value="{{Auth::user()->avatar}}">
-            <img src="{{ asset(Auth::user()->avatar) }}" alt="">
+            <input type="file" name="avatar" class="form-control" value="{{Auth::guard('admin')->user()->avatar}}">
+            <img src="{{ asset(Auth::guard('admin')->user()->avatar) }}" alt="">
         </div>
        
         <div class="form-group">

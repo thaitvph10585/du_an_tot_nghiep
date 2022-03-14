@@ -1,5 +1,6 @@
 @extends('welcome')
 @section('content')
+@include('sweetalert::alert')
 <div class="card-body">
     <h6 class="card-title">Danh sách notify</h6>
     

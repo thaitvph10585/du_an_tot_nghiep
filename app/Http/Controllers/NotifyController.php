@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Notify;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NotifyController extends Controller
 {
@@ -53,6 +54,7 @@ class NotifyController extends Controller
         }
         $model->fill($request->all());
         $model->save();
+        Alert::success('Success!', 'Bạn đã cập nhật thành công');
         return redirect('admin/notify');
     }
 }

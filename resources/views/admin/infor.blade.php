@@ -6,15 +6,15 @@
         @csrf
         <div class="form-group mb-3">
             <label  for="">Tên người dùng</label>
-            <input type="name" name="name" class="form-control" value="{{  $infor->name }}" placeholder="Name">
+            <input type="name" name="name" class="form-control" value="{{  Auth::guard('admin')->user()->name }}" placeholder="Name">
         </div>
         <div class="form-group mb-3">
             <label  for="">Email</label>
-            <input type="email" name="email" class="form-control" value="{{$infor->email}}" placeholder="Email">
+            <input type="email" name="email" class="form-control" value="{{Auth::guard('admin')->user()->email}}" placeholder="Email">
         </div>
         <div class="form-group mb-3">
             <label  for="">Ảnh đại diện</label>
-            <img src="{{ asset($infor->avatar) }}" alt="">
+            <img src="{{ asset(Auth::guard('admin')->user()->avatar) }}" alt="">
         </div>
         <div class="col-4">
             <a href="{{ route('admin.account') }}">Change infor account</a>

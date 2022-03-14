@@ -10,26 +10,26 @@
     <form action="" method="post" novalidate>
         @csrf
         <div class="input-group mb-3">
-            <input type="name" name="name" class="form-control" value="{{$infor->name}}" placeholder="Name">
+            <input type="name" name="name" class="form-control" value="{{Auth::guard('web')->user()->name}}" placeholder="Name">
         </div>
         @error('name')
                 <p class="text-danger">{{$message}}</p>
         @enderror
         <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control" value="{{$infor->email}}" placeholder="Email">
+            <input type="email" name="email" class="form-control" value="{{Auth::guard('web')->user()->email}}" placeholder="Email">
         </div>
         @error('email')
                 <p class="text-danger">{{$message}}</p>
         @enderror
         <div class="input-group mb-3">
-            <input type="text" name="phone_number" class="form-control" value="{{$infor->phone_number}}" placeholder="Phone number">
+            <input type="text" name="phone_number" class="form-control" value="{{Auth::guard('web')->user()->phone_number}}" placeholder="Phone number">
         </div>
         @error('phone_number')
                 <p class="text-danger">{{$message}}</p>
         @enderror
         <div class="input-group mb-3">
-            <input type="file" name="avatar" class="form-control" value="{{$infor->avatar}}" placeholder="Phone number">
-            <img src="{{ asset($infor->avatar) }}" alt="">
+            <input type="file" name="avatar" class="form-control" value="{{Auth::guard('web')->user()->avatar}}" placeholder="Phone number">
+            <img src="{{ asset(Auth::guard('web')->user()->avatar) }}" alt="">
         </div>
         @error('avatar')
                 <p class="text-danger">{{$message}}</p>
