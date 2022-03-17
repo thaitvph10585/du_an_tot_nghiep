@@ -54,7 +54,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::get('infor', [InforController::class, 'inforAdmin'])->name('infor');
         Route::get('update-infor', [InforController::class, 'editAdminForm'])->name('account');
-        Route::post('update-infor', [InforController::class, 'saveEditAdmin']);
+        Route::post('update-infor', [InforController::class, 'saveEditAdmin'])->name('admin.edit'); 
+        
     });
 });
 

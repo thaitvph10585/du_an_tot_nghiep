@@ -3,7 +3,7 @@
 @include('sweetalert::alert')
 <div class="card-body">
     <h6 class="card-title">Thông tin tài khoản</h6>
-    <form action="" method="post" novalidate enctype="multipart/form-data">
+    <form action="{{ route('admin.admin.edit') }}" method="post" novalidate enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3">
             <label  for="">Tên người dùng</label>
